@@ -16,3 +16,11 @@ class App extends Component {
 }
 
 export default App;
+
+
+
+// customBackdrop
+
+// custom button component and giving styles in array(for cancel and continue on modal)
+
+// () component will return without writing return, {} component should have a return statement explicitly
