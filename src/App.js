@@ -19,8 +19,9 @@ export default App;
 
 
 
-// customBackdrop
+// Toolbar at top of the screen
 
-// custom button component and giving styles in array(for cancel and continue on modal)
+// Images cannot go directly into src attribute, instead we have to import the image with an alias and then use it. This is because as webpack bundles all the files it cannot
+// find the image if we give image path in src attribute
 
-// () component will return without writing return, {} component should have a return statement explicitly
+// Sidedrawer feature
