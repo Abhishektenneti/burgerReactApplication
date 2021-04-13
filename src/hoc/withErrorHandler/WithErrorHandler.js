@@ -14,10 +14,10 @@ const withErrorHandler = (WrappedComponent, axios) =>{
                 this.setState({error:error});
             });
         }
-        componentWillMount(){
-            axios.interceptors.request.eject(this.reqIntercep);
-            axios.interceptors.response.eject(this.resIntercep);
-        }
+        // componentWillMount(){
+        //     axios.interceptors.request.eject(this.reqIntercep);
+        //     axios.interceptors.response.eject(this.resIntercep);
+        // }
         errorConfirmedHandler(){
             this.setState({error:null});
         }
