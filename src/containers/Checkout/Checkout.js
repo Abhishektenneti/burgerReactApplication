@@ -12,6 +12,21 @@ class Checkout extends Component {
         }
     }
 
+    componentDidMount(){
+        const query = new URLSearchParams(this.props.location.search);
+        // console.log(this.props.location.search);
+        // console.log(query);
+        const ingredients = {};
+        for(let param of query.entries())
+        {
+            // console.log(param);
+            ingredients[param[0]] = +param[1];//having '+' sign before converts it from string to integer
+          
+        }
+        // console.log(ingredients);
+        this.setState({ingredients:ingredients});
+    }
+
     checkoutCancelledHandler = () =>{
             this.props.history.goBack();
     }
