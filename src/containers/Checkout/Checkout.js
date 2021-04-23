@@ -7,26 +7,33 @@ import ContactData from './ContactData/ContactData';
 class Checkout extends Component {
     state={
         ingredients : {
+            bacon : 1,
             salad : 1,
-            meat :1,
-            cheese : 1,
-            bacon : 1
-        }
+            meat : 1
+        },
+        totalPrice : 0
     }
 
-    componentDidMount(){
+    componentWillMount(){//this is changed from DidMount(will render child components before state is assigned) to WillMount()
+                        //WillMount() will render children after running this function but not working for me
         const query = new URLSearchParams(this.props.location.search);
         // console.log(this.props.location.search);
         // console.log(query);
         const ingredients = {};
+        let price = 0;
         for(let param of query.entries())
         {
             // console.log(param);
-            ingredients[param[0]] = +param[1];//having '+' sign before converts it from string to integer
+            if(param[0]==='price')
+            {
+                price = param[1];
+                this.setState({totalPrice : price,ingredients:ingredients});
+            }else{
+                ingredients[param[0]] = +param[1];//having '+' sign before converts it from string to integer
+            }
           
         }
         // console.log(ingredients);
-        this.setState({ingredients:ingredients});
     }
 
     checkoutCancelledHandler = () =>{
@@ -35,6 +42,7 @@ class Checkout extends Component {
 
     checkoutContinuedHandler = () =>{
             this.props.history.replace('/checkout/contact-data');
+            // this.props.history.push({pathname:'/checkout/contact-data'});
     }
 
     render(){
@@ -43,7 +51,8 @@ class Checkout extends Component {
                 <CheckoutSummary ingredients={this.state.ingredients} 
                 checkoutCancelled={this.checkoutCancelledHandler}
                 checkoutContinued={this.checkoutContinuedHandler}/>
-                <Route path={this.props.match.path+'/contact-data'} component={ContactData}/>
+                <Route path={this.props.match.path+'/contact-data'} 
+                render ={()=>(<ContactData ingredients={this.state.ingredients} price={this.state.totalPrice}/>)}/>
             </div>
         );
     }
