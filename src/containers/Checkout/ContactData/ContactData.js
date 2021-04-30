@@ -27,8 +27,10 @@ class ContactData extends Component{
                     customer : {name:'abhi',address:{street:'test street',country:'india'}}
                 }
                 axios.post('/orders.json',order).then(response=>{
+                        console.log(response);
                         this.setState({loading:false});
                 }).catch(error=> {
+                        console.log(error);
                         this.setState({loading:false});
                         });
                 this.props.history.push('/checkout');       
@@ -41,7 +43,7 @@ class ContactData extends Component{
                     <input type="email" name="email" placeholder="Your Email"/>
                     <input type="text" name="street" placeholder="Street"/>
                     <input type="text" name="postal" placeholder="Postal Code"/>
-                    <Button btnType="Success" clicked={this.orderHandler}>ORDER</Button>
+                    <Button btnType="Success" buttonClicked={this.orderHandler}>ORDER</Button>
                 </form>
             );
             if(this.state.loading){
